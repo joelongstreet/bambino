@@ -10,9 +10,30 @@ const utils = {
         return a;
     },
 
-    // gets a random element from an array
-    random (arr) {
-        return arr[Math.floor(Math.random()*arr.length)];
+    // gets a random object value or element from an array
+    random (arrOrObject) {
+        if(arrOrObject.length === undefined){
+            let result,
+                count = 0;
+
+            for (var key in arrOrObject)
+                if (Math.random() < 1/++count)
+                   result = arrOrObject[key];
+            return result;
+        } else{
+            return arrOrObject[Math.floor(
+                Math.random()*arrOrObject.length
+            )];
+        }
+    },
+
+    // returns a file name without extension from a full path
+    getFileNameFromPath (url) {
+        let urlParts = url.split('/'),
+            file = urlParts[urlParts.length - 1],
+            fileName = file.split('.')[0];
+
+        return fileName;
     }
 
 };

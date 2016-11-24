@@ -7,7 +7,7 @@ class Quiz{
             new Request("/api/quiz")
         ).then(response => {
             response.json().then(data => {
-                this.questions = data;
+                this.catalog = data;
                 this.emitter.emit("ready");
             });
         });
@@ -24,21 +24,52 @@ class Quiz{
         });
     }
 
+    deriveAnswerFromQuestion(question, answers){
+        let q = utils.getFileNameFromPath(question),
+            answerPath;
+
+        answers.forEach(function(a){
+            if(utils.getFileNameFromPath(a) === q){
+                answerPath = a;
+            }
+        });
+
+        return answerPath;
+    }
+
+
+    choiceTemplate (path) {
+        return `<div class="element fourth answer" style="background-image:url(${path})"></div>`;
+    }
+
+    questionTemplate (path) {
+        return `<video autoplay loop><source src="${path}"/></video>`;
+    }
+
     loadQuestion(){
-        let section = utils.random(this.questions);
+        let category = utils.random(this.catalog),
+            question = utils.random(category.questions),
+            answer = this.deriveAnswerFromQuestion(question, category.answers),
+            choices = utils.shuffle(category.answers).slice(0, 4);
+
+        if(!choices.includes(answer)){
+            choices.pop();
+            choices.push(answer);
+            choices = utils.shuffle(choices);
+        }
+
+        this.correctAnswerIndex = choices.indexOf(answer);
+
         $("#answers, #question").empty();
 
-        let shuffledAnswers = utils.shuffle(section.answers);
-        this.correctAnswerIndex = shuffledAnswers.indexOf(section.answers[0]);
-
-        shuffledAnswers.forEach(answer => {
+        choices.forEach(choice => {
             $("#answers").append(
-                templates.answer(answer)
+                this.choiceTemplate(choice)
             );
         });
 
         $("#question").append(
-            templates.question(section.question)
+            this.questionTemplate(question)
         );
     }
 }

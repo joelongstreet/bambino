@@ -5,7 +5,7 @@ let animation = {
             "tada"
         ],
         fail: [
-            "wobble", "shake", "flash"
+            "wobble", "shake"
         ],
         leave: [
             "bounceOut", "bounceOutDown", "bounceOutLeft", "bounceOutRight", "bounceOutUp",
