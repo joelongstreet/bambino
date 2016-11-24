@@ -1,9 +1,10 @@
 class Gpio{
     constructor(){
+        this.socket = io('/');
         this.emitter = new EventEmitter2();
 
         document.addEventListener("keydown", e => {
-            let input = (keyCode => {
+            let index = (keyCode => {
                 switch(keyCode) {
                     case 49: return 0;
                     case 50: return 1;
@@ -13,8 +14,14 @@ class Gpio{
                 }
             })(e.keyCode);
 
-            if(input !== false) {
-                this.emitter.emit("input", input);
+            if(index !== false) {
+                this.emitter.emit("input", index);
+            }
+        });
+
+        this.socket.on("gpio", d => {
+            if(d.val == 1){
+                this.emitter.emit("input", d.pin);
             }
         });
     }
