@@ -25,7 +25,7 @@ class Quiz{
     }
 
     loadQuestion(){
-        let section = utils.shuffle(this.questions)[0];
+        let section = utils.random(this.questions);
         $("#answers, #question").empty();
 
         let shuffledAnswers = utils.shuffle(section.answers);
