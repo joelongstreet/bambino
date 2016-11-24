@@ -4,8 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node app.js",
-    "test": "./node_modules/mocha/bin/mocha",
-    "format-assets": "node ./bin/format-assets"
+    "format-assets": "node ./lib/format-assets"
   },
   "dependencies": {
     "express": "~4.14.0",
