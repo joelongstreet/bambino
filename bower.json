@@ -1,0 +1,22 @@
+{
+  "name": "bambino",
+  "description": "",
+  "main": "",
+  "authors": [
+    "Joe Longstreet"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "animate.css": "^3.5.2",
+    "zepto": "^1.1.6",
+    "eventemitter2": "^2.2.0"
+  }
+}

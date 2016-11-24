@@ -1,0 +1,21 @@
+{
+  "name": "bambino",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www",
+    "test": "./node_modules/mocha/bin/mocha",
+    "format-assets": "node ./bin/format-assets"
+  },
+  "dependencies": {
+    "express": "~4.14.0"
+  },
+  "devDependencies": {
+    "fluent-ffmpeg": "^2.1.0",
+    "gm": "^1.23.0",
+    "mocha": "^3.1.2"
+  },
+  "engines": {
+    "node": "6.9.1"
+  }
+}
