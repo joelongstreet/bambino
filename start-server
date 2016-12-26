@@ -1,4 +1,0 @@
-#!/bin/bash
-
-cd ~/Projects/bambino
-npm start

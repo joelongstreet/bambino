@@ -1,0 +1,12 @@
+[Unit]
+Description=Bambino Web Service
+
+[Service]
+ExecStart=/home/pi/.nvm/versions/node/v6.9.2/bin/node /home/pi/Projects/bambino/app.js
+Restart=always
+RestartSec=10
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=bambino-web
+BusName=org.joelongstreet.BambinoWeb
+Environment=cwd=/home/pi/Projects/bambino
