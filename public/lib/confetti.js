@@ -22,7 +22,7 @@ class Confetti{
         let self = this;
         this.particles = [];
 
-        for(let i = 0; i < 300; i++){
+        for(let i = 0; i < 50; i++){
             this.particles.push({
             	x:         this.width/2,
             	y:         this.height/2,
@@ -55,25 +55,9 @@ class Confetti{
 
         particle.angle += particle.anglespin;
         particle.velY *= 0.999;
-        particle.velY += 0.3;
+        particle.velY += 0.999;
         particle.x += particle.velX;
         particle.y += particle.velY;
-
-        if(particle.y < 0){
-            particle.velY *= -0.2;
-            particle.velX *= 0.9;
-        }
-
-        if(particle.y > particle.height){
-            particle.anglespin = 0;
-            particle.y = particle.height;
-            particle.velY *= -0.2;
-            particle.velX *= 0.9;
-        }
-
-        if(particle.x > particle.width ||particle.x < 0){
-            particle.velX *= -0.5;
-        }
     }
 
     update(self){
