@@ -10,3 +10,6 @@ StandardError=syslog
 SyslogIdentifier=bambino-web
 BusName=org.joelongstreet.BambinoWeb
 Environment=cwd=/home/pi/Projects/bambino
+
+[Install]
+WantedBy=multi-user.target
