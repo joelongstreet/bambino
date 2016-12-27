@@ -1,5 +1,6 @@
 class Gpio{
     constructor(){
+        this.pinStatus = [0, 0, 0, 0];
         this.socket = io('/');
         this.emitter = new EventEmitter2();
 
@@ -20,6 +21,12 @@ class Gpio{
         });
 
         this.socket.on("gpio", d => {
+            this.pinStatus[d.pin] = d.val;
+
+            if(this.pinStatus.every(el => el == 1)){
+                window.location.href = "/menu";
+            }
+
             if(d.val == 1){
                 this.emitter.emit("input", d.pin);
             }
