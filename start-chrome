@@ -1,5 +1,0 @@
-#!/bin/bash
-
-sleep 2
-/usr/bin/chromium-browser --kiosk http://localhost:3000/quiz
-
