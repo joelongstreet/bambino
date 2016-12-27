@@ -4,6 +4,6 @@ html, body{
   height: 100%;
   overflow: hidden;
   font-family: Helvetica;
-  background-color: black;
+  background: white url("/assets/img/geometry.png") repeat;
   color: white;
 }

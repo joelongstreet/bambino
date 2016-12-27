@@ -4,8 +4,11 @@
   height: 100%;
 }
 #question video{
-  width: 95%;
+  display: block;
+  width: 90%;
   margin: 2% auto 0;
+  border-radius: 20px;
+  border: 3px solid #e0e0e0;
 }
 
 
@@ -19,12 +22,20 @@
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  border: 5px solid white;
-  border-radius: 5px;
+  border: 3px solid #e0e0e0;
+  border-radius: 20px;
   height: 100%;
-  background-color: white;
   float: left;
   box-sizing: border-box;
   width: 20%;
   margin-left: 4%;
+}
+
+
+#confetti{
+    position:absolute;
+	left:0;
+	top:0;
+	z-index:0;
+	border:0px solid #000;
 }
