@@ -72,4 +72,8 @@ class Quiz{
             this.questionTemplate(question)
         );
     }
+
+    pauseVideo(){
+        $("#question").find("video")[0].pause();
+    }
 }
