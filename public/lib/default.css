@@ -7,29 +7,3 @@ html, body{
   background-color: black;
   color: white;
 }
-
-.container{
-  width: 100%;
-  position: absolute;
-}
-.container.full{
-  height: 100%;
-}
-.container.bottom{
-  bottom: 2.5%;
-}
-.container.third{
-  height: 25%;
-}
-
-
-.element{
-  height: 100%;
-  background-color: white;
-  float: left;
-  box-sizing: border-box;
-}
-.element.fourth{
-  width: 20%;
-  margin-left: 4%;
-}

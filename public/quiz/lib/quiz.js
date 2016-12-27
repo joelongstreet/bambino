@@ -39,7 +39,7 @@ class Quiz{
 
 
     choiceTemplate (path) {
-        return `<div class="element fourth answer" style="background-image:url(${path})"></div>`;
+        return `<div class="answer" style="background-image:url(${path})"></div>`;
     }
 
     questionTemplate (path) {
