@@ -1,5 +1,4 @@
 let gpio = new Gpio(),
-    throttled = false,
     catalog = [],
     $catalog = $("#catalog"),
     selectedIndex = 0;

@@ -17,4 +17,5 @@ app.use(express.static(
 
 app.get("/api/menu", routes.menu);
 app.get("/api/sounds", routes.sounds);
+app.get("/api/signs", routes.signs);
 app.get("/api/quiz", routes.quiz);

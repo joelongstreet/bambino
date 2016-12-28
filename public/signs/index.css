@@ -1,0 +1,23 @@
+#image, #video{
+    position: absolute;
+    top: 0;
+    height: 100%;
+}
+
+#image{
+    z-index: 2;
+    left: 0;
+    width: 50%;
+    background-color: white;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+#video{
+    z-index: 1;
+    height: 100%;
+    width: 50%;
+    right: 0;
+    background-color: orange;
+}
