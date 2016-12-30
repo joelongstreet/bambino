@@ -15,7 +15,6 @@ app.use(express.static(
     path.join(__dirname, 'public')
 ));
 
-app.get("/api/home", routes.home);
 app.get("/api/sounds", routes.sounds);
 app.get("/api/signs", routes.signs);
 app.get("/api/quiz", routes.quiz);

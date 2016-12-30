@@ -4,15 +4,16 @@ class Menu {
         this.catalog = [];
         this.$el = $(selector);
         this.selectedIndex = 0;
-        this.template = function(item){
-            return `<div class="item" style="background-image:url(./assets/img/${item}.jpg)"></div>`;
-        };
 
         this.gpio.emitter.on("input", index => {
             if(index === 0) this.navigate("-");
             else if(index === 3) this.navigate('+');
-            else this.select();
+            else this.select(this.catalog[this.selectedIndex]);
         });
+    }
+
+    template(item){
+        return `<div class="item" style="background-image:url(./assets/img/${item}.jpg)"></div>`;
     }
 
     buildUi(){
@@ -25,8 +26,8 @@ class Menu {
         });
     }
 
-    select(){
-        window.location.href = `/${this.catalog[this.selectedIndex]}`;
+    select(item){
+        window.location.href = `/${item}`;
     }
 
     navigate(direction){

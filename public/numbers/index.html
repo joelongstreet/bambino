@@ -4,9 +4,10 @@
     <meta charset="utf-8">
 
     <link rel="stylesheet" href="/lib/default.css" />
+    <link rel="stylesheet" href="./index.css" />
 </head>
-<body class="home">
-    <div id="menu"></div>
+<body>
+    <div id="page"></div>
 
     <script type="text/javascript" src="/vendor/zepto/zepto.js"></script>
     <script type="text/javascript" src="/vendor/eventemitter2/lib/eventemitter2.js"></script>
@@ -14,12 +15,8 @@
 
     <script type="text/javascript" src="/lib/utils.js"></script>
     <script type="text/javascript" src="/lib/gpio.js"></script>
-    <script type="text/javascript" src="/lib/menu.js"></script>
+    <script type="text/javascript" src="/lib/book.js"></script>
 
-    <script type="text/javascript">
-        let menu = new Menu("#menu");
-        menu.catalog = utils.shuffle(["quiz", "signs", "alphabet", "numbers"]);
-        menu.buildUi();
-    </script>
+    <script type="text/javascript" src="./index.js"></script>
 </body>
 </html>
