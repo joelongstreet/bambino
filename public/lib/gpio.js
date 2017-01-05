@@ -23,8 +23,8 @@ class Gpio{
 
         this.socket.on("gpio", d => {
 			if(this.pinStatus[d.pin] != d.val){
-				this.pinStatus[d.pin] = d.val
-				
+				this.pinStatus[d.pin] = d.val;
+
 				if(this.pinStatus.every(el => el == 1)){
 					window.location.href = "/";
 				}

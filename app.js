@@ -1,6 +1,6 @@
 "use strict";
 
-let express = require("express"),
+const express = require("express"),
     path = require("path"),
     routes = require("./lib/routes"),
     app = express(),

@@ -28,7 +28,7 @@ class Quiz{
         let q = utils.getFileNameFromPath(question),
             answerPath;
 
-        answers.forEach(function(a){
+        answers.forEach(a => {
             if(utils.getFileNameFromPath(a) === q){
                 answerPath = a;
             }
