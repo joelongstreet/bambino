@@ -30,6 +30,8 @@ class Gpio{
             if(d.val == 1){
                 this.emitter.emit("input", d.pin);
             }
+
+            this.emitter.emit("update", d.pin, d.val);
         });
     }
 }
