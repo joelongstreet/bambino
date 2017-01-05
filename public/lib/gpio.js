@@ -22,7 +22,7 @@ class Gpio{
         });
 
         this.socket.on("gpio", d => {
-            if(!throttled){
+            if(!this.throttled){
                 this.pinStatus[d.pin] = d.val;
 
                 if(this.pinStatus.every(el => el == 1)){
@@ -37,7 +37,7 @@ class Gpio{
             }
 
             this.throttled = true;
-            setTimeout(() => throttled = false, 2000);
+            setTimeout(() => this.throttled = false, 2000);
         });
     }
 }
