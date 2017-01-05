@@ -8,6 +8,11 @@ html, body{
     color: white;
 }
 
+#page, .page{
+    width: 100%;
+    height: 100%;
+}
+
 
 #menu{
     height: 100%;

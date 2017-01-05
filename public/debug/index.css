@@ -1,0 +1,15 @@
+#page{
+    display: table;
+}
+
+.gpio{
+    display: table-cell;
+    vertical-align: middle;
+    color: black;
+    font-size: 300%;
+    width: 25%;
+    text-align: center;
+    height: 100%;
+    font-weight: bold;
+    font-family: monospace;
+}
