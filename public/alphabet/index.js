@@ -5,10 +5,10 @@ var book = new Book(
         template: page => {
             return [
                 `<div class='alphabet page'>`,
-                    `<div class='letter' style='background-image:url(./assets/${page}.jpg)'></div>`,
-                    `<div class='example' style='background-image:url(./assets/${page}-img.jpg)'></div>`,
+                    `<div class='letter' style='background-image:url(/assets/alphabet/${page}.jpg)'></div>`,
+                    `<div class='example' style='background-image:url(/assets/alphabet/${page}-img.jpg)'></div>`,
                     `<audio autoplay>`,
-                        `<source src='./alphabet/${page}.mp3' type='audio/mpeg'></source>`,
+                        `<source src='/assets/alphabet/${page}.mp3' type='audio/mpeg'></source>`,
                     `</audio>`,
                 `</div>`
             ].join('');

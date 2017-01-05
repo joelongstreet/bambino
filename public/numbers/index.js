@@ -5,9 +5,9 @@ var book = new Book(
         template: page => {
             return [
                 `<div class='numbers page'>`,
-                    `<div class='number' style='background-image:url(./assets/${page}.jpg)'></div>`,
+                    `<div class='number' style='background-image:url(/assets/numbers/${page}.jpg)'></div>`,
                     `<audio autoplay>`,
-                        `<source src='./assets/numbers/${page}.mp3' type='audio/mpeg'></source>`,
+                        `<source src='/assets/numbers/${page}.mp3' type='audio/mpeg'></source>`,
                     `</audio>`,
                 `</div>`
             ].join('');

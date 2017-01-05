@@ -13,8 +13,7 @@ class Answer{
         });
     }
 
-    template (prefix, asset){
-        let path = `/assets/sounds/${prefix}/${asset}`;
+    template (prefix, path){
         return `<audio class=${prefix}><source src=${path}/></audio>`;
     }
 
