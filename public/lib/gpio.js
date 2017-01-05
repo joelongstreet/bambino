@@ -26,7 +26,7 @@ class Gpio{
                 this.pinStatus[d.pin] = d.val;
 
                 if(this.pinStatus.every(el => el == 1)){
-                    window.location.href = "/menu";
+                    window.location.href = "/";
                 }
 
                 if(d.val == 1){
