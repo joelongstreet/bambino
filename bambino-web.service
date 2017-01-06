@@ -3,8 +3,8 @@ Description=Bambino Web Service
 
 [Service]
 ExecStart=/home/pi/.nvm/versions/node/v6.9.2/bin/node /home/pi/Projects/bambino/app.js
-Restart=always
-RestartSec=10
+Restart=on-failure
+RestartSec=1
 StandardOutput=syslog
 StandardError=syslog
 SyslogIdentifier=bambino-web
