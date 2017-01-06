@@ -4,6 +4,9 @@ class Menu {
         this.catalog = [];
         this.$el = $(selector);
         this.selectedIndex = 0;
+        this.colorPalette = [ "#512DA8", "#303F9F", "#1976D2", "#0288D1",
+        "#0097A7", "#00796B", "#388E3C", "#689F38", "#AFB42B", "#FBC02D",
+        "#FFA000", "#F57C00", "#E64A19", "#5D4037", "#616161"];
 
         this.gpio.emitter.on("input", index => {
             if(index === 0) this.navigate("-");
@@ -13,7 +16,11 @@ class Menu {
     }
 
     template(item){
-        return `<div class="item" style="background-image:url(./assets/img/${item}.jpg)"></div>`;
+        let charArray = item.title.split("").map(i => {
+            if(utils.random([0, 1])) i = i.toUpperCase();
+            return `<span style="color:${utils.random(this.colorPalette)}">${i}</span>`;
+        });
+        return `<div class="item"><h1>${charArray.join('')}</h1></div>`;
     }
 
     buildUi(){
@@ -27,7 +34,7 @@ class Menu {
     }
 
     select(item){
-        window.location.href = `/${item}`;
+        window.location.href = `/${item.route}`;
     }
 
     navigate(direction){

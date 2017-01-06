@@ -8,7 +8,7 @@ const express = require("express"),
     io = require("socket.io")(server),
     gpio = require("./lib/gpio")(io),
     port = process.env.PORT || 3000,
-    categories = ["alphabet", "numbers", "quiz", "signs"];
+    menu = require("./lib/menu");
 
 server.listen(port);
 
@@ -19,13 +19,16 @@ app.use(express.static(
     path.join(__dirname, 'public')
 ));
 
+
+// API Routes
 app.get("/api/sounds", routes.sounds);
 app.get("/api/signs", routes.signs);
 app.get("/api/quiz", routes.quiz);
-app.get("/api/menu", (req, res) => res.send(categories));
+app.get("/api/menu", (req, res) => res.send(menu));
 
 
+// View Routes
 app.get("/", (req, res) => res.render("index"));
-categories.forEach(category => {
-    app.get(`/${category}`, (req, res) => res.render(`${category}`));
+menu.forEach(category => {
+    app.get(`/${category.route}`, (req, res) => res.render(`${category.route}`));
 });

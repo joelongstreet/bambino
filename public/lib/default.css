@@ -1,3 +1,11 @@
+@font-face {
+  font-family: 'Coming Soon';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Coming Soon'), local('ComingSoon'), url(/assets/coming-soon.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+}
+
 html, body{
     margin: 0;
     width: 100%;
@@ -5,7 +13,6 @@ html, body{
     overflow: hidden;
     font-family: Helvetica;
     background: white url("/assets/img/geometry.png") repeat;
-    color: white;
 }
 
 #page, .page{
@@ -23,15 +30,19 @@ html, body{
 }
 
 #menu .item{
-    width: 90vw;
-    height: 90vh;
+    width: 100vw;
+    height: 100%;
     float: left;
-    border-radius: 20px;
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-color: white;
-    background-position: center center;
-    border: 3px solid #e0e0e0;
-    margin: 5vw;
-    box-sizing: border-box;
+    display: table;
+}
+
+#menu h1{
+    color: black;
+    text-align: center;
+    height: 100%;
+    width: 100%;
+    vertical-align: middle;
+    display: table-cell;
+    font-family: 'Coming Soon';
+    font-size: 500%;
 }
