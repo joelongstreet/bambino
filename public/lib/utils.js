@@ -11,18 +11,20 @@ const utils = {
     },
 
     // gets a random object value or element from an array
-    random (arrOrObject) {
-        if(arrOrObject.length === undefined){
+    random (param) {
+        if(typeof param === "number"){
+            return Math.floor(Math.random() * (param - 1));
+        } else if(param.length === undefined){
             let result,
                 count = 0;
 
-            for (var key in arrOrObject)
+            for (var key in param)
                 if (Math.random() < 1/++count)
-                   result = arrOrObject[key];
+                   result = param[key];
             return result;
         } else{
-            return arrOrObject[Math.floor(
-                Math.random()*arrOrObject.length
+            return param[Math.floor(
+                Math.random()*param.length
             )];
         }
     },

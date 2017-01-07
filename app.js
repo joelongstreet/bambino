@@ -23,7 +23,7 @@ app.use(express.static(
 
 // API Routes
 app.get("/api/sounds", routes.sounds);
-app.get("/api/signs", routes.signs);
+app.get("/api/book/:path", routes.book);
 app.get("/api/quiz", routes.quiz);
 app.get("/api/menu", (req, res) => res.send(menu));
 

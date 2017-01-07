@@ -16,7 +16,7 @@ class Menu {
     }
 
     template(item){
-        let charArray = item.title.split("").map(i => {
+        let charArray = Array.from(item.title).map(i => {
             if(utils.random([0, 1])) i = i.toUpperCase();
             return `<span style="color:${utils.random(this.colorPalette)}">${i}</span>`;
         });
