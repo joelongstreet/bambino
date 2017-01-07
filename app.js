@@ -8,13 +8,12 @@ const express = require("express"),
     io = require("socket.io")(server),
     gpio = require("./lib/gpio")(io),
     port = process.env.PORT || 3000,
-    menu = require("./lib/menu"),
-    cwd = process.env.cwd || process.cwd();
+    menu = require("./lib/menu");
 
 server.listen(port);
 
 app.set("view engine", "pug");
-app.set("views", path.join(cwd, "public"));
+app.set("views", path.join(__dirname, "../public"));
 
 app.use(express.static(
     path.join(__dirname, 'public')
