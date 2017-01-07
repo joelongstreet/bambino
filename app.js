@@ -13,7 +13,7 @@ const express = require("express"),
 server.listen(port);
 
 app.set("view engine", "pug");
-app.set("views", path.join(__dirname, "../public"));
+app.set("views", path.join(__dirname, "public"));
 
 app.use(express.static(
     path.join(__dirname, 'public')
