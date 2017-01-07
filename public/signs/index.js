@@ -15,8 +15,10 @@ fetch(
     new Request("/api/book/signs")
 ).then(response => {
     response.json().then(data => {
-        book.writePages(
-            Object.values(data)
-        );
+        let pages = [];
+        for(let key in data) {
+            pages.push(data[key]);
+        }
+        book.writePages(pages);
     });
 });
