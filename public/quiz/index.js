@@ -1,7 +1,7 @@
 let quiz = new Quiz(),
     win = new Win(),
     fail = new Fail(),
-    gpio = new Gpio(),
+    gpio = new Gpio({ timeoutSeconds: 20 }),
     confetti = new Confetti("confetti"),
     throttled = false;
 

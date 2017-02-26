@@ -1,5 +1,8 @@
 class Gpio{
-    constructor(){
+    constructor(opts){
+        Object.assign(this, opts || {});
+        this.scheduleTimeout();
+
         this.pinStatus = [0, 0, 0, 0];
         this.socket = io('/');
         this.emitter = new EventEmitter2();
@@ -17,6 +20,7 @@ class Gpio{
 
             if(index !== false) {
                 this.emitter.emit("input", index);
+                this.scheduleTimeout();
             }
         });
 
@@ -25,15 +29,27 @@ class Gpio{
                 this.pinStatus[d.pin] = d.val;
 
                 if(this.pinStatus.every(el => el == 1)){
-                    window.location.href = "/";
+                    this.goToMenu();
                 }
 
                 if(d.val == 1){
                     this.emitter.emit("input", d.pin);
                 }
 
+                this.scheduleTimeout();
                 this.emitter.emit("update", d.pin, d.val);
             }
         });
+    }
+
+    scheduleTimeout(){
+        if(this.timeoutSeconds){
+            clearTimeout(this.timeout);
+            this.timeout = setTimeout(this.goToMenu, this.timeoutSeconds*1000);
+        }
+    }
+
+    goToMenu(){
+        window.location.href = "/";
     }
 }

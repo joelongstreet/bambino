@@ -7,7 +7,7 @@ class Book{
         this.template = options.template || function(){};
 
         this.currentPage = 0;
-        this.gpio = new Gpio();
+        this.gpio = new Gpio({ timeoutSeconds: 20 });
         this.emitter = new EventEmitter2();
 
         this.gpio.emitter.on("input", index => {
