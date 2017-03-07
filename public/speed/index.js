@@ -14,61 +14,67 @@ let score,
     $audio = $('audio'),
     $score = $('#score');
 
-resetGame();
+startGame();
 
 gpio.emitter.on("input", index => {
     if(timeLeft > 0){
         if(index === instruction){
-            score++;
+            score += Math.round(
+                (timeLeft/timeAllowed)*100
+            );
             loadInstruction();
-        } else if(timeInterval){
-            lose();
+        } else{
+            endGame();
         }
     }
 });
 
 
 function loadInstruction(){
-    resetTimer();
+    clearInterval(timeInterval);
+    if(timeAllowed > 100) timeAllowed -= 50;
+    timeLeft = timeAllowed;
+    timeInterval = setInterval(tick, 1);
+
+    $audio.forEach($a => {
+        $a.pause();
+        $a.currentTime = 0;
+    });
+
     let color = utils.random(colors);
     instruction = colors.indexOf(color);
     $instruction.css('backgroundColor', color);
     $audio[instruction].play();
 }
 
-function resetTimer(){
-    clearInterval(timeInterval);
-
-    if(timeAllowed > 100) timeAllowed -= 50;
-    timeLeft = timeAllowed;
-    timeInterval = setInterval(tick, 1);
-}
 
 function tick(){
     timeLeft -= 1;
     let time = timeLeft/timeAllowed;
 
     if(time <= 0){
-        lose();
-    } else {
+        endGame();
+    } else{
         $timer.css('width', time*100 + '%');
     }
 }
 
-function lose(){
-    timeLeft = 0;
+
+function startGame(){
+    $score.hide();
+    timeAllowed = startTimeAllowed;
+    score = 0;
+    loadInstruction();
+}
+
+
+function endGame(){
     $audio[4].play();
     $instruction.css('backgroundColor', 'transparent');
     $score.text(score);
     $score.show();
 
+    timeLeft = 0;
     clearInterval(timeInterval);
-    setTimeout(resetGame, 3000);
-}
-
-function resetGame(){
-    $score.hide();
-    timeAllowed = startTimeAllowed;
-    score = 0;
-    loadInstruction();
+    setTimeout(startGame, 3000);
 }
