@@ -2,8 +2,7 @@ let quiz = new Quiz(),
     win = new Win(),
     fail = new Fail(),
     gpio = new Gpio({ timeoutSeconds: 20 }),
-    confetti = new Confetti("confetti"),
-    throttled = false;
+    confetti = new Confetti("confetti");
 
 quiz.emitter.once("ready", () => quiz.loadQuestion());
 win.emitter.on("done", () => quiz.loadQuestion());

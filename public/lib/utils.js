@@ -10,7 +10,7 @@ const utils = {
         return a;
     },
 
-    // gets a random object value or element from an array
+    // gets a random object value, element from an array, or number
     random (param) {
         if(typeof param === "number"){
             return Math.floor(Math.random() * (param - 1));
