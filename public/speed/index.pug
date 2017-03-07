@@ -2,20 +2,25 @@ extends ../layout.pug
 
 block deps
     link(rel="stylesheet", href="./index.css")
+    script(type="text/javascript", src="/lib/confetti.js")
     script(type="text/javascript", src="./index.js")
 
 block content
-    #score 0
+    canvas#confetti
+    #score
+    #hi-score
     #instruction
     #timer
 
-    audio
+    audio.color
         source(src='/assets/speed/red.m4a')
-    audio
+    audio.color
         source(src='/assets/speed/green.m4a')
-    audio
+    audio.color
         source(src='/assets/speed/yellow.m4a')
-    audio
+    audio.color
         source(src='/assets/speed/blue.m4a')
-    audio
+    audio.lose
         source(src='/assets/sounds/fail/not-enough-coins-to-buy.wav')
+    audio.win
+        source(src='/assets/sounds/win/cranker-win-sound.wav')

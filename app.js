@@ -25,7 +25,7 @@ app.get("/api/sounds", routes.sounds);
 app.get("/api/book/:path", routes.book);
 app.get("/api/quiz", routes.quiz);
 app.get("/api/menu", (req, res) => res.send(menu));
-
+app.get("/api/speed/:score", routes.speed);
 
 // View Routes
 app.get("/", (req, res) => res.render("index"));

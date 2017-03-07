@@ -6,3 +6,4 @@ public/assets
 .help
 .todo
 *.log
+dirty.db

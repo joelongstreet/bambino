@@ -22,3 +22,13 @@
     margin-top: 30%;
     font-size: 900%;
 }
+
+#hi-score{
+    font-family: 'Coming Soon';
+    position: absolute;
+    right: 5%;
+    text-align: right;
+    bottom: 5%;
+    color: black;
+    font-size: 200%;
+}

@@ -1,6 +1,7 @@
 const startTimeAllowed = 3000,
-    gpio = new Gpio({ timeoutSeconds: 20 });
-    colors = ["red", "green", "yellow", "blue"];
+    gpio = new Gpio({ timeoutSeconds: null }),
+    colors = ["red", "green", "yellow", "blue"],
+    confetti = new Confetti("confetti");
 
 let score,
     instruction,
@@ -11,8 +12,14 @@ let score,
 
     $instruction = $('#instruction'),
     $timer = $('#timer'),
-    $audio = $('audio'),
-    $score = $('#score');
+    $score = $('#score'),
+    $hiScore = $('#hi-score'),
+    $sound = {
+        colors: $('audio.color'),
+        win: $('audio.win')[0],
+        lose: $('audio.lose')[0]
+    };
+
 
 startGame();
 
@@ -36,7 +43,7 @@ function loadInstruction(){
     timeLeft = timeAllowed;
     timeInterval = setInterval(tick, 1);
 
-    $audio.forEach($a => {
+    $sound.colors.forEach($a => {
         $a.pause();
         $a.currentTime = 0;
     });
@@ -44,7 +51,7 @@ function loadInstruction(){
     let color = utils.random(colors);
     instruction = colors.indexOf(color);
     $instruction.css('backgroundColor', color);
-    $audio[instruction].play();
+    $sound.colors[instruction].play();
 }
 
 
@@ -62,6 +69,10 @@ function tick(){
 
 function startGame(){
     $score.hide();
+    $score.text('');
+    $hiScore.hide();
+    $hiScore.text('');
+
     timeAllowed = startTimeAllowed;
     score = 0;
     loadInstruction();
@@ -69,10 +80,24 @@ function startGame(){
 
 
 function endGame(){
-    $audio[4].play();
     $instruction.css('backgroundColor', 'transparent');
     $score.text(score);
     $score.show();
+
+    fetch(
+        new Request(`/api/speed/${score}`)
+    ).then(response => {
+        if(response.status === 201){
+            $sound.win.play();
+            confetti.launch();
+        } else {
+            $sound.lose.play();
+            response.json().then(data => {
+                $hiScore.show();
+                $hiScore.text(`High Score: ${data}`);
+            });
+        }
+    });
 
     timeLeft = 0;
     clearInterval(timeInterval);
