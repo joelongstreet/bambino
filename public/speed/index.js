@@ -1,11 +1,13 @@
 const gpio = new Gpio({ timeoutSeconds: null }),
     timer = new Timer(3000),
     colors = ["red", "green", "yellow", "blue"],
-    confetti = new Confetti("confetti");
+    confetti = new Confetti("confetti"),
+    mode = new URL(window.location.href).searchParams.get('mode');
 
 let score,
     instruction,
     $instruction = $('#instruction'),
+    $instructionText = $('#instruction').find('.text'),
     $score = $('#score'),
     $hiScore = $('#hi-score'),
     $sound = {
@@ -14,7 +16,6 @@ let score,
         lose: $('audio.lose')[0]
     };
 
-startGame();
 
 timer.emitter.on('expired', endGame);
 gpio.emitter.on("input", index => {
@@ -37,16 +38,34 @@ function loadInstruction(){
         $a.currentTime = 0;
     });
 
-    let color = utils.random(colors);
-    instruction = colors.indexOf(color);
-    $instruction.css('backgroundColor', color);
-    $sound.colors[instruction].play();
+    instruction = utils.random(colors.length + 1);
+
+    let color = colors[instruction],
+        sound = $sound.colors[instruction];
+
+    if(mode === 'hard'){
+        let textColor = utils.random(colors);
+
+        $instructionText.text(color);
+        $instructionText.css('color', textColor);
+        $instruction.css('backgroundColor', utils.random(
+            colors.filter(c => c !== textColor )
+        ));
+    } else {
+        $instruction.css('backgroundColor', color);
+    }
+
+    sound.play();
 }
 
 
 function startGame(){
     $score.hide(); $hiScore.hide();
     $score.text(''); $hiScore.text('');
+
+    if(mode === 'hard'){
+        $instructionText.show(); $instructionText.text('');
+    }
 
     score = 0;
     timer.reset();
@@ -56,10 +75,11 @@ function startGame(){
 
 function endGame(){
     $instruction.css('backgroundColor', 'transparent');
+    $instructionText.hide();
     $score.text(score); $score.show();
 
     fetch(
-        new Request(`/api/speed/${score}`)
+        new Request(`/api/speed/${score}?mode=${mode}`)
     ).then(response => {
         if(response.status === 201){
             $sound.win.play();
@@ -75,3 +95,6 @@ function endGame(){
 
     setTimeout(startGame, 3000);
 }
+
+
+startGame();
