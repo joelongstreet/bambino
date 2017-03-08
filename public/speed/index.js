@@ -1,17 +1,11 @@
-const startTimeAllowed = 3000,
-    gpio = new Gpio({ timeoutSeconds: null }),
+const gpio = new Gpio({ timeoutSeconds: null }),
+    timer = new Timer(3000),
     colors = ["red", "green", "yellow", "blue"],
     confetti = new Confetti("confetti");
 
 let score,
     instruction,
-
-    timeInterval = null,
-    timeAllowed = startTimeAllowed,
-    timeLeft = timeAllowed,
-
     $instruction = $('#instruction'),
-    $timer = $('#timer'),
     $score = $('#score'),
     $hiScore = $('#hi-score'),
     $sound = {
@@ -20,28 +14,23 @@ let score,
         lose: $('audio.lose')[0]
     };
 
-
 startGame();
 
+timer.emitter.on('expired', endGame);
 gpio.emitter.on("input", index => {
-    if(timeLeft > 0){
+    if(timer.valid){
         if(index === instruction){
-            score += Math.round(
-                (timeLeft/timeAllowed)*100
-            );
+            score += timer.getPercentComplete();
             loadInstruction();
         } else{
-            endGame();
+            timer.expire();
         }
     }
 });
 
 
 function loadInstruction(){
-    clearInterval(timeInterval);
-    if(timeAllowed > 100) timeAllowed -= 50;
-    timeLeft = timeAllowed;
-    timeInterval = setInterval(tick, 1);
+    timer.decrement();
 
     $sound.colors.forEach($a => {
         $a.pause();
@@ -55,34 +44,19 @@ function loadInstruction(){
 }
 
 
-function tick(){
-    timeLeft -= 1;
-    let time = timeLeft/timeAllowed;
-
-    if(time <= 0){
-        endGame();
-    } else{
-        $timer.css('width', time*100 + '%');
-    }
-}
-
-
 function startGame(){
-    $score.hide();
-    $score.text('');
-    $hiScore.hide();
-    $hiScore.text('');
+    $score.hide(); $hiScore.hide();
+    $score.text(''); $hiScore.text('');
 
-    timeAllowed = startTimeAllowed;
     score = 0;
+    timer.reset();
     loadInstruction();
 }
 
 
 function endGame(){
     $instruction.css('backgroundColor', 'transparent');
-    $score.text(score);
-    $score.show();
+    $score.text(score); $score.show();
 
     fetch(
         new Request(`/api/speed/${score}`)
@@ -93,13 +67,11 @@ function endGame(){
         } else {
             $sound.lose.play();
             response.json().then(data => {
-                $hiScore.show();
                 $hiScore.text(`High Score: ${data}`);
+                $hiScore.show();
             });
         }
     });
 
-    timeLeft = 0;
-    clearInterval(timeInterval);
     setTimeout(startGame, 3000);
 }
