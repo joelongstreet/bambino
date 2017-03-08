@@ -2,7 +2,7 @@ const gpio = new Gpio({ timeoutSeconds: null }),
     timer = new Timer(3000),
     colors = ["red", "green", "yellow", "blue"],
     confetti = new Confetti("confetti"),
-    mode = new URL(window.location.href).searchParams.get('mode');
+    mode = new URL(window.location.href).searchParams.get('mode') || 'easy';
 
 let score,
     instruction,
