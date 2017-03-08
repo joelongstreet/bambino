@@ -40,8 +40,7 @@ function loadInstruction(){
 
     instruction = utils.random(colors.length + 1);
 
-    let color = colors[instruction],
-        sound = $sound.colors[instruction];
+    let color = colors[instruction];
 
     if(mode === 'hard'){
         let textColor = utils.random(colors);
@@ -51,11 +50,11 @@ function loadInstruction(){
         $instruction.css('backgroundColor', utils.random(
             colors.filter(c => c !== textColor )
         ));
+        utils.random($sound.colors).play();
     } else {
         $instruction.css('backgroundColor', color);
+        $sound.colors[instruction].play();
     }
-
-    sound.play();
 }
 
 
