@@ -1,6 +1,6 @@
 const gpio = new Gpio({ timeoutSeconds: null }),
     timer = new Timer(3000),
-    colors = ["red", "green", "yellow", "blue"],
+    colors = ["blue", "yellow", "green", "red"],
     confetti = new Confetti("confetti"),
     mode = new URL(window.location.href).searchParams.get('mode') || 'easy';
 

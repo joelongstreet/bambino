@@ -9,9 +9,9 @@ class Menu {
         "#FFA000", "#F57C00", "#E64A19", "#5D4037", "#616161"];
 
         this.gpio.emitter.on("input", index => {
-            if(index === 0) this.navigate("-");
-            else if(index === 3) this.navigate('+');
-            else this.select(this.catalog[this.selectedIndex]);
+            if(index === 4) this.navigate("-");
+            else if(index === 6) this.navigate('+');
+            else if(index === 5) this.select(this.catalog[this.selectedIndex]);
         });
     }
 

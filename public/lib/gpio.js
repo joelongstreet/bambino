@@ -3,7 +3,7 @@ class Gpio{
         Object.assign(this, opts || {});
         this.scheduleTimeout();
 
-        this.pinStatus = [0, 0, 0, 0];
+        this.pinStatus = [0, 0, 0, 0, 0, 0, 0];
         this.socket = io('/');
         this.emitter = new EventEmitter2();
 
@@ -27,10 +27,14 @@ class Gpio{
         this.socket.on("gpio", d => {
             if(this.pinStatus[d.pin] != d.val){
                 this.pinStatus[d.pin] = d.val;
-
+				
                 if(this.pinStatus.every(el => el == 1)){
                     this.goToMenu();
                 }
+                
+                if(this.pinStatus[5] === 1) {
+					this.goToMenu();
+				}
 
                 if(d.val == 1){
                     this.emitter.emit("input", d.pin);
