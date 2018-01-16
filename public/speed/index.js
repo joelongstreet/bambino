@@ -1,4 +1,4 @@
-const gpio = new Gpio({ timeoutSeconds: null }),
+const gpio = new Gpio({ timeoutSeconds: 20 }),
     timer = new Timer(3000),
     colors = ["blue", "yellow", "green", "red"],
     confetti = new Confetti("confetti"),
